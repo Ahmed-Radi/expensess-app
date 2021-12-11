@@ -12,10 +12,10 @@ const EditExpensePage = (props) => {
 	);
 };
 
-const mapStateTopProps = (state, params) => {
-    console.log(params)
+const mapStateTopProps = (state, props) => {
+    console.log(props)
     return {
-        expense: state.expense.find((expense) => expense.id === params.id)
+        expense: state.expense.find((expense) => expense.id === props.id)
     }
 }
 
