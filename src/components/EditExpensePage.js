@@ -1,21 +1,31 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
+import ExpenseForm from './ExpenseForm';
+import { useNavigate  } from "react-router-dom";
 
 const EditExpensePage = (props) => {
-	const params = useParams();
-    console.log(params)
+	const { id } = useParams();
+    const navigate = useNavigate();
+    const selectExpense = props.expense.find(expense => expense.id === id);
+    console.log(selectExpense)
+    console.log(props.expense)
 	return (
 		<div>
-			<p>Editing the expenses with the id of {params.id}</p>
+            <ExpenseForm
+                expense={props.expense}
+                onSubmit={(expense) => {
+                    console.log('Updated', expense)
+                }}
+            />
+			<p>Editing the expenses with the id of { id }</p>
 		</div>
 	);
 };
 
-const mapStateTopProps = (state, props) => {
-    console.log(props)
+const mapStateTopProps = (state) => {
     return {
-        expense: state.expense.find((expense) => expense.id === props.id)
+        expense: state.expenses,
     }
 }
 
